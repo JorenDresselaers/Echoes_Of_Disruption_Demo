@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d1144cff8aaf499c53cb5da92967c, type: 3}
+  m_Name: SpeedBoostItemCard
+  m_EditorClassIdentifier: 
+  _objectToSpawn: {fileID: 4679011498467378790, guid: 1a3d743b7ac05494898e7e8cebc8c65b,
+    type: 3}
+  _cost: 0
+  _weight: 1
