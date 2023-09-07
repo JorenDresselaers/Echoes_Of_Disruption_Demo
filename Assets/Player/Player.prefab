@@ -768,6 +768,7 @@ MonoBehaviour:
   _class: {fileID: 0}
   _isMelee: 0
   _baseAttackSpeed: 1
+  _attackSpeed: 1
 --- !u!114 &2367872218746363571
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,17 +15,8 @@ public class BasePlayerClass : MonoBehaviour
     {
         player.ClearSkills();
         player._isMelee = _isMelee;
-        if (_isMelee)
-        {
-            player.GetMeleeAttack()._damage = _damage;
-            player.GetMeleeAttack().SetAttackSpeed(_attackSpeed);
-        }
-        else
-        {
-            player.GetShootCameraLook().SetDamage(_damage);
-            player.GetShootCameraLook().SetAttackSpeed(_attackSpeed);
-        }
         player._baseAttackSpeed = _attackSpeed;
+        player.SetAttackSpeed(_attackSpeed);
 
         player.SetOffeniveSkill(_offensiveSkill);
         player.SetDefensiveSkill(_defensiveSkill);

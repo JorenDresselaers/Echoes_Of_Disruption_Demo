@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -22,6 +23,10 @@ public class PlayerCharacter : BaseCharacter
 
     public bool _isMelee = true;
     public float _baseAttackSpeed = 1f;
+    public float _attackSpeed = 1f;
+
+    //talents
+    private BaseTalentTree _talentTree;
 
     protected override void Awake()
     {
@@ -141,6 +146,13 @@ public class PlayerCharacter : BaseCharacter
         }
     }
 
+    public void ResetAttackSpeed()
+    {
+        _attackSpeed = _baseAttackSpeed;
+        _meleeAttack.SetAttackSpeed(_baseAttackSpeed);
+        _shootAtCameraLook.SetAttackSpeed(_baseAttackSpeed);
+    }
+
     //getters
     public ShootAtCameraLook GetShootCameraLook()
     {
@@ -150,6 +162,11 @@ public class PlayerCharacter : BaseCharacter
     public float GetBaseAttackSpeed()
     {
         return _baseAttackSpeed;
+    }
+
+    public float GetAttackSpeed()
+    {
+        return _attackSpeed;
     }
 
     public MeleeAttack GetMeleeAttack()
@@ -182,17 +199,37 @@ public class PlayerCharacter : BaseCharacter
     {
         _class = playerClass;
         _class.Initialize(this);
+        _talentTree.Initialize(this);
+    }
+
+    public void SetTalentTree(BaseTalentTree tree)
+    {
+        _talentTree = tree;
+        if (!_talentTree) return;
+        //tree.Initialize(this);
     }
 
     public void SetAttackSpeed(float attackSpeed)
     {
-        _meleeAttack.SetAttackSpeed(attackSpeed);
-        _shootAtCameraLook.SetAttackSpeed(attackSpeed);
+        _attackSpeed = attackSpeed;
+        _meleeAttack.SetAttackSpeed(_attackSpeed);
+        _shootAtCameraLook.SetAttackSpeed(_attackSpeed);
     }
 
-    public void ResetAttackSpeed()
+    public float IncreaseAttackSpeed(float attackSpeedBuff, bool isPercentage = true)
     {
-        _meleeAttack.SetAttackSpeed(_baseAttackSpeed);
-        _shootAtCameraLook.SetAttackSpeed(_baseAttackSpeed);
+        if (isPercentage)
+        {
+            _attackSpeed *= attackSpeedBuff;
+        }
+        else
+        {
+            _attackSpeed -= attackSpeedBuff;
+            if(_attackSpeed < 0 ) _attackSpeed = 0f;
+        }
+        _meleeAttack.SetAttackSpeed(_attackSpeed);
+        _shootAtCameraLook.SetAttackSpeed(_attackSpeed);
+
+        return _attackSpeed;
     }
 }
